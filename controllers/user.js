@@ -16,7 +16,7 @@ export const register = async (req, res) => {
       email,
       phone,
     });
-    res.status(200).json({ user: newUser });
+    res.status(201).json({ user: newUser });
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "用户注册失败" });
@@ -43,7 +43,7 @@ export const login = async (req, res) => {
         sameSite: "none",
         secure: true,
       })
-      .status(200)
+      .status(201)
       .json({
         user: {
           id: user.id,
@@ -77,7 +77,7 @@ export const resetPassword = async (req, res) => {
     const hashedPassword = bcrypt.hashSync(newPassword, salt);
     user.password = hashedPassword;
     await user.save();
-    res.status(200).json({ message: "密码重置成功" });
+    res.status(201).json({ message: "密码重置成功" });
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: "密码重置失败" });
